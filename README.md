@@ -71,9 +71,14 @@ Files are synthesised by iterating over [rpvsusy.py](https://github.com/alexmars
 
 
 
-## Steps to run a standard job
+## Steps to run a standard job with HTCondor
 
-
+In the job submit script
+```
+arguments="5 1 5 1.2 3 1 0 b"
+#--benchmark --plot --plot1massmax --plot2mass --leptongeneration 
+# --visible (1 - visible only, 0 -all) --bzerobplus (for bench 5. 0 - b0 events only, 1 - bplus events only) --charm/beauty
+```
 
 
 
