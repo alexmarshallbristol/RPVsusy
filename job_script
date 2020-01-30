@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "SETUP"
+source /cvmfs/ship.cern.ch/SHiP-2018/latest/setUp.sh
+SHIPBUILD_mymaster=/afs/cern.ch/user/a/amarshal/RPV_new
+export ALIBUILD_WORK_DIR=$SHIPBUILD_mymaster/sw #for alienv
+source $SHIPBUILD_mymaster/config.sh
+echo
+echo "python $FAIRSHIP/macro/run_simScript.py"
+echo
+python $FAIRSHIP/macro/run_simScript.py --jobid "$id" -n 100 --plot "$2" --plot1massmax "$3" --plot2mass "$4" --SusyBench "$1" --leptongeneration "$5" --visible "$6" --bzerobplus "$7" -A "$8"
+echo
+echo "python $FAIRSHIP/macro/ShipReco.py "
+echo
+python $FAIRSHIP/macro/ShipReco.py -g geofile_full.conical.Pythia8-TGeant4.root -f ship.conical.Pythia8-TGeant4.root
+echo
+echo "python FairShip/macro/RPV_get_rate.py"
+echo
+python $FAIRSHIP/macro/RPV_get_rate.py -jobid "$id" -benchmark "$1" -plot "$2" -plot1massmax "$3" -plot2mass "$4" -leptongeneration "$5" -visible "$6" -bzerobplus "$7"
+echo
+echo "cp grid_data_rpv_* /eos/experiment/ship/user/amarshal/RPV_output/NEW/."
+echo
+cp grid_data_rpv_* /eos/experiment/ship/user/amarshal/RPV_output/NEW/.
+echo
+echo "rm dead files"
+echo
+rm *.root
+rm *.npy
+rm *.cc
+rm dummy
+rm *.txt
+echo
+echo "OUT"
+echo

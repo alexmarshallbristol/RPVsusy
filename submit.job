@@ -1,0 +1,15 @@
+job = SHiP_RPV
+universe = vanilla
+executable = job_script
+environment = "id=$(Process)"
+arguments="5 1 5 1.2 3 1 0 b"
+#--benchmark --plot --plot1massmax --plot2mass --leptongeneration 
+# --visible (1 - visible only, 0 -all) --bzerobplus (for bench 5. 0 - b0 events only, 1 - bplus events only) --charm/beauty
+should_transfer_files = YES
+getenv = true
+when_to_transfer_output = ON_EXIT
+log = OUTPUT/$(job)_$(Cluster).log
+output = /afs/cern.ch/user/a/amarshal/RPV_new/OUTPUT/$(job)_$(Cluster)_$(Process).out
+error = /afs/cern.ch/user/a/amarshal/RPV_new/OUTPUT/$(job)_$(Cluster)_$(Process).out
++JobFlavour = "tomorrow"
+queue 225
